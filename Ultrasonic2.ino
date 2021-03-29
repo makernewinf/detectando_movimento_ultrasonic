@@ -36,14 +36,14 @@ String result;
 WiFiClient client;
 HTTPClient http;
 
-unsigned long lastConnectionTime = 0;        // last time you connected to the server, in milliseconds
-boolean lastConnected = false;               // state of the connection last time through the main loop
+unsigned long lastConnectionTime = 0;        
+boolean lastConnected = false;               
 
 void setup(){
-pinMode(echoPin, INPUT); //DEFINE O PINO COMO ENTRADA (RECEBE)
-pinMode(trigPin, OUTPUT); //DEFINE O PINO COMO SAÍDA (ENVIA)
-pinMode(pinoLed, OUTPUT); //DECLARA O PINO COMO SENDO SAÍDA
-Serial.begin(9600); //INICIALIZA A PORTA SERIAL
+pinMode(echoPin, INPUT);     // Pino de entrada - recebe 
+pinMode(trigPin, OUTPUT);    // Pino de saida - envia
+pinMode(pinoLed, OUTPUT);    // Pino do saida - Led
+Serial.begin(9600);          
 
  // Tenta conexão com Wi-fi
   WiFi.begin(ssid, senha);
@@ -63,24 +63,24 @@ Serial.print("Distancia ");
 Serial.print(result); 
 Serial.println("cm"); 
 if(distancia <= 30){             // Distancia 30cm
- digitalWrite(pinoLed,HIGH);     //ACIONA LED
+ digitalWrite(pinoLed,HIGH);     // Aciona o Led
  gravaweb();
 }else{//SENÃO, FAZ
- // digitalWrite(pinoLed,LOW);      // DESLIGA LED ou Não
+ // digitalWrite(pinoLed,LOW);   // Desliga o Led ou Não
 }
 }
 
 
 // CALCULAR A DISTÂNCIA
 void hcsr04(){
-digitalWrite(trigPin, LOW);           //SETA O PINO 6 COM UM PULSO BAIXO "LOW"
-delayMicroseconds(2);                 // DELAY DE 2 MICROSSEGUNDOS
-digitalWrite(trigPin, HIGH);          //SETA O PINO 6 COM PULSO ALTO "HIGH"
-delayMicroseconds(10);                // DELAY DE 10 MICROSSEGUNDOS
-digitalWrite(trigPin, LOW);           //SETA O PINO 6 COM PULSO BAIXO "LOW" NOVAMENTE
-distancia = (ultrasonic.Ranging(CM)); // VARIÁVEL GLOBAL RECEBE O VALOR DA DISTÂNCIA MEDIDA
+digitalWrite(trigPin, LOW);           
+delayMicroseconds(2);                 
+digitalWrite(trigPin, HIGH);          
+delayMicroseconds(10);                
+digitalWrite(trigPin, LOW);           
+distancia = (ultrasonic.Ranging(CM)); 
 result = String(distancia);
-delay(500);                           //INTERVALO DE 500 MILISSEGUNDOS
+delay(500);                           
 }
  
 
